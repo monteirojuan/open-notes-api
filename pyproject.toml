@@ -6,6 +6,9 @@ authors = ["Juan Monteiro <juan.monteiro@jmonteiro.net>"]
 readme = "README.md"
 packages = [{include = "open_notes_api", from = "src"}]
 
+[tool.poetry.scripts]
+server = "open_notes_api.main:run_dev"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 fastapi = "^0.85.0"

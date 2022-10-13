@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import List
-import schema
+from open_notes_api import schema
 
 app = FastAPI(
     title="OpenNotes API",
@@ -26,3 +26,9 @@ async def read_note(note_id: int):
 @app.delete("/notes/{note_id}/")
 async def delete_note(note_id: int):
     return None
+
+
+def run_dev():
+    """Atalho para rodar o servidor durante desenvolvimento."""
+    import uvicorn
+    uvicorn.run("open_notes_api.main:app", log_level="info", reload=True)
