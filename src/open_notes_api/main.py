@@ -1,11 +1,18 @@
 from fastapi import FastAPI
 from typing import List
-from open_notes_api import schema
+from open_notes_api import schema, db, models
+
 
 app = FastAPI(
     title="OpenNotes API",
     description="""API desenvolvida para o **Trabalho 1** da disciplina de sistemas distribuídos."""
 )
+
+
+@app.on_event("startup")
+async def startup():
+    async with db.engine.begin() as conn:
+        await conn.run_sync(models.Base.metadata.create_all)
 
 
 @app.put("/notes/", response_model=schema.Note)

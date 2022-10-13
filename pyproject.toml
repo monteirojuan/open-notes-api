@@ -13,6 +13,8 @@ server = "open_notes_api.main:run_dev"
 python = "^3.10"
 fastapi = "^0.85.0"
 uvicorn = {extras = ["standard"], version = "^0.18.3"}
+SQLAlchemy = {version = "2.0.0b1", extras = ["asyncio"]}
+syncpg = "^1.1.2"
 
 
 [build-system]
