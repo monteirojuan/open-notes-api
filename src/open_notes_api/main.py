@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from typing import List
-from open_notes_api import schema, db, models
+from open_notes_api import schema, db, models, controller
 
 
 app = FastAPI(
@@ -15,14 +15,20 @@ async def startup():
         await conn.run_sync(models.Base.metadata.create_all)
 
 
-@app.put("/notes/", response_model=schema.Note)
+@app.post("/notes/", response_model=schema.Note)
 async def create_note():
     return None
 
 
-@app.get("/notes/", response_model=List[schema.Note])
-async def read_notes():
+@app.patch("/notes/", response_model=schema.Note)
+async def update_note():
     return None
+
+
+@app.get("/notes/", response_model=List[schema.Note], name="Lista Anotações")
+async def read_notes():
+    """Lista todas as anotações criadas."""
+    return await controller.list_notes(db.session)
 
 
 @app.get("/notes/{note_id}/", response_model=schema.Note)
