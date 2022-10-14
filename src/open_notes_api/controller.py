@@ -24,3 +24,12 @@ async def list_notes(db: async_sessionmaker):
         async with session.begin():
             notes = await session.execute(select(models.Note))
             return notes.scalars().all()
+
+
+async def delete_note(db: async_sessionmaker, note_id: int):
+    async with db() as session:
+        async with session.begin():
+            query = await session.execute(select(models.Note).where(models.Note.id == note_id))
+            if note := query.scalars().first():
+                await session.delete(note)
+                await session.commit()

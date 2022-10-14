@@ -17,6 +17,7 @@ async def startup():
 
 @app.post("/notes/", response_model=schema.Note)
 async def create_note(note: schema.NoteCreate):
+    """Cria uma anotação."""
     return await controller.create_note(db=db.session, note=note)
 
 
@@ -25,7 +26,7 @@ async def update_note():
     return None
 
 
-@app.get("/notes/", response_model=List[schema.Note], name="Lista Anotações")
+@app.get("/notes/", response_model=List[schema.Note])
 async def read_notes():
     """Lista todas as anotações criadas."""
     return await controller.list_notes(db.session)
@@ -38,6 +39,8 @@ async def read_note(note_id: int):
 
 @app.delete("/notes/{note_id}/")
 async def delete_note(note_id: int):
+    """Deleta uma anotação."""
+    await controller.delete_note(db=db.session, note_id=note_id)
     return None
 
 
