@@ -1,5 +1,5 @@
 from sqlalchemy.orm import DeclarativeBase, mapped_column
-from sqlalchemy import Integer, DateTime, String, Text, Boolean, func
+from sqlalchemy import Integer, DateTime, String, Text, Boolean, func, false
 
 
 class Base(DeclarativeBase):
@@ -12,10 +12,10 @@ class Note(Base):
     id = mapped_column(Integer, primary_key=True)
     title = mapped_column(String)
     content = mapped_column(Text)
-    pinnned = mapped_column(Boolean)
-    archived = mapped_column(Boolean)
+    pinned = mapped_column(Boolean, default=false())
+    archived = mapped_column(Boolean, default=false())
     created_at = mapped_column(DateTime, server_default=func.now())
-    updated_at = mapped_column(DateTime, server_onupdate=func.now())
+    updated_at = mapped_column(DateTime, server_default=func.now(), server_onupdate=func.now())
     pinnned_at = mapped_column(DateTime)
     archived_at = mapped_column(DateTime)
 

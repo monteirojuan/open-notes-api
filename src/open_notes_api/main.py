@@ -16,8 +16,8 @@ async def startup():
 
 
 @app.post("/notes/", response_model=schema.Note)
-async def create_note():
-    return None
+async def create_note(note: schema.NoteCreate):
+    return await controller.create_note(db=db.session, note=note)
 
 
 @app.patch("/notes/", response_model=schema.Note)
