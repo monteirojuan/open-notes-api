@@ -21,11 +21,6 @@ async def create_note(note: schema.NoteCreate):
     return await controller.create_note(db=db.session, note=note)
 
 
-@app.patch("/notes/", response_model=schema.Note)
-async def update_note():
-    return None
-
-
 @app.get("/notes/", response_model=List[schema.Note])
 async def read_notes():
     """Lista todas as anotações criadas."""
@@ -35,6 +30,11 @@ async def read_notes():
 @app.get("/notes/{note_id}/", response_model=schema.Note)
 async def read_note(note_id: int):
     return None
+
+
+@app.patch("/notes/{note_id}/", response_model=schema.Note)
+async def update_note(note_id: int, note: schema.NoteUpdate):
+    return await controller.update_note(db=db.session, note_id=note_id, data=note)
 
 
 @app.delete("/notes/{note_id}/")

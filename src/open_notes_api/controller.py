@@ -26,6 +26,20 @@ async def list_notes(db: async_sessionmaker):
             return notes.scalars().all()
 
 
+async def update_note(db: async_sessionmaker, note_id: int, data: schema.NoteUpdate):
+    async with db() as session:
+        async with session.begin():
+            query = await session.execute(select(models.Note).where(models.Note.id == note_id))
+            if note := query.scalars().first():
+                if data.title:
+                    note.title = data.title
+                if data.content:
+                    note.content = data.content
+            await session.commit()
+        await session.refresh(note)
+        return note
+
+
 async def delete_note(db: async_sessionmaker, note_id: int):
     async with db() as session:
         async with session.begin():
