@@ -29,11 +29,13 @@ async def read_notes():
 
 @app.get("/notes/{note_id}/", response_model=schema.Note)
 async def read_note(note_id: int):
-    return None
+    """Retorna uma anotação."""
+    return await controller.read_note(db.session, note_id=note_id)
 
 
 @app.patch("/notes/{note_id}/", response_model=schema.Note)
 async def update_note(note_id: int, note: schema.NoteUpdate):
+    """Atualiza uma anotação."""
     return await controller.update_note(db=db.session, note_id=note_id, data=note)
 
 
