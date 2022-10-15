@@ -16,7 +16,7 @@ class Note(Base):
     archived = mapped_column(Boolean, default=false())
     created_at = mapped_column(DateTime, server_default=func.now())
     updated_at = mapped_column(DateTime, server_default=func.now(), server_onupdate=func.now())
-    pinnned_at = mapped_column(DateTime)
+    pinned_at = mapped_column(DateTime)
     archived_at = mapped_column(DateTime)
 
     __mapper_args__ = {"eager_defaults": True}
