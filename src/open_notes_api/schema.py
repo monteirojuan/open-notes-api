@@ -1,10 +1,12 @@
+"""Este módulo contém os schemas utilizados na API."""
 import datetime
 
 from pydantic import BaseModel
 
 
-class Note(BaseModel):
+class Note(BaseModel):  # pylint: disable=too-few-public-methods
     """Schema utilizado na leitura das anotações."""
+
     id: int
     title: str
     content: str | None = None
@@ -15,17 +17,16 @@ class Note(BaseModel):
     pinned_at: datetime.datetime | None
     archived_at: datetime.datetime | None
 
-    class Config:
-        orm_mode = True
 
-
-class NoteCreate(BaseModel):
+class NoteCreate(BaseModel):  # pylint: disable=too-few-public-methods
     """Schema utilizado na criação da anotação."""
+
     title: str
     content: str | None = None
 
 
-class NoteUpdate(BaseModel):
+class NoteUpdate(BaseModel):  # pylint: disable=too-few-public-methods
     """Schema utilizado na atualização de uma anotação."""
+
     title: str | None = None
     content: str | None = None

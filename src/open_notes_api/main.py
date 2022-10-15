@@ -1,16 +1,19 @@
-from fastapi import FastAPI
+"""Módulo de entrada da aplicação."""
 from typing import List
-from open_notes_api import schema, db, models, controller
 
+from fastapi import FastAPI
+
+from open_notes_api import schema, db, models, controller
 
 app = FastAPI(
     title="OpenNotes API",
-    description="""API desenvolvida para o **Trabalho 1** da disciplina de sistemas distribuídos."""
+    description="""API desenvolvida para o Trabalho 1 da disciplina de sistemas distribuídos.""",
 )
 
 
 @app.on_event("startup")
 async def startup():
+    """Realiza ações durante a inicialização da aplicação."""
     async with db.engine.begin() as conn:
         await conn.run_sync(models.Base.metadata.create_all)
 
@@ -48,5 +51,6 @@ async def delete_note(note_id: int):
 
 def run_dev():
     """Atalho para rodar o servidor durante desenvolvimento."""
-    import uvicorn
+    import uvicorn # pylint: disable=import-outside-toplevel
+
     uvicorn.run("open_notes_api.main:app", log_level="info", reload=True)

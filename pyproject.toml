@@ -17,6 +17,16 @@ SQLAlchemy = {version = "2.0.0b1", extras = ["asyncio"]}
 syncpg = "^1.1.2"
 
 
+[tool.poetry.group.dev.dependencies]
+pylint = "^2.15.4"
+black = "^22.10.0"
+
+[tool.pylint]
+good-names = ["db"]
+
+[tool.pylint.'MESSAGES CONTROL']
+extension-pkg-whitelist = "pydantic"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
