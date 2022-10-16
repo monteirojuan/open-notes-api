@@ -322,17 +322,6 @@ anyio = ">=3.4.0,<5"
 full = ["itsdangerous", "jinja2", "python-multipart", "pyyaml", "requests"]
 
 [[package]]
-name = "syncpg"
-version = "1.1.2"
-description = "synchronous wrapper for asyncpg"
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-asyncpg = ">=0.20.1,<1.0.0"
-
-[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -421,7 +410,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "7e22d1e1362daa09aafd4a94ab7c11fa2d9c840c3a25240264feacc1480d82e8"
+content-hash = "c07f10b4f245379363ab811b3b968c302dd664cb702c05e49a770528affcfa83"
 
 [metadata.files]
 anyio = [
@@ -815,10 +804,6 @@ SQLAlchemy = [
 starlette = [
     {file = "starlette-0.20.4-py3-none-any.whl", hash = "sha256:c0414d5a56297d37f3db96a84034d61ce29889b9eaccf65eb98a0b39441fcaa3"},
     {file = "starlette-0.20.4.tar.gz", hash = "sha256:42fcf3122f998fefce3e2c5ad7e5edbf0f02cf685d646a83a08d404726af5084"},
-]
-syncpg = [
-    {file = "syncpg-1.1.2-py3-none-any.whl", hash = "sha256:62f1e03c28ee6b50533ae3cbaa639152b37aa50128a867cc4e9ae1b3033c7f97"},
-    {file = "syncpg-1.1.2.tar.gz", hash = "sha256:6d151e02ed199eae80ad8a4194ef63a52d7dbdd6a4468a0093bec4336737a27c"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
