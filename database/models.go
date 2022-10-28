@@ -3,13 +3,13 @@ package database
 import "time"
 
 type Note struct {
-	ID          uint   `gorm:"primaryKey"`
-	title       string `gorm:"not null"`
-	content     string
-	pinned      bool      `gorm:"default:false"`
-	archived    bool      `gorm:"default:false"`
-	created_at  time.Time `gorm:"autoCreateTime"`
-	updated_at  time.Time `gorm:"autoUpdateTime"`
-	pinned_at   time.Time
-	archived_at time.Time
+	ID         uint      `gorm:"primaryKey" json:"id"`
+	Title      string    `gorm:"not null" json:"title"`
+	Content    string    `json:"content"`
+	Pinned     bool      `gorm:"default:false" json:"pinned"`
+	Archived   bool      `gorm:"default:false" json:"archived"`
+	CreatedAt  time.Time `gorm:"autoCreateTime" json:"created_at"`
+	UpdatedAt  time.Time `gorm:"autoUpdateTime" json:"updated_at"`
+	PinnedAt   time.Time `json:"pinned_at"`
+	ArchivedAt time.Time `json:"archived_at"`
 }
