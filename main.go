@@ -15,16 +15,17 @@ import (
 
 func main() {
 	config.LoadConfiguration()
+	viper.GetString("PORT")
 
-	database.Connect(viper.GetString("database.dsn"))
+	database.Connect()
 	database.Migrate()
 
 	router := mux.NewRouter().StrictSlash(true)
 	RegisterRoutes(router)
 	router.Use(LogRequest(router))
 
-	log.Printf("Iniciando o servidor na porta %s", viper.GetString("server.port"))
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", viper.GetString("server.port")), router))
+	log.Printf("Iniciando o servidor na porta %s", viper.GetString("PORT"))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", viper.GetString("PORT")), router))
 }
 
 func RegisterRoutes(router *mux.Router) {
