@@ -2,4 +2,4 @@
 port = 8000
 
 [database]
-dsn = "host=localhost user=gorm password=gorm dbname=gorm sslmode=disable"
+dsn = "host=localhost user=postgres password=password dbname=postgres sslmode=disable"
