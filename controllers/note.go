@@ -39,6 +39,22 @@ func GetNoteById(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(note)
 }
 
+func UpdateNote(w http.ResponseWriter, r *http.Request) {
+	note_id := mux.Vars(r)["id"]
+	var note database.Note
+	database.Instance.First(&note, note_id)
+
+	if note.ID == 0 {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
+	json.NewDecoder(r.Body).Decode(&note)
+	database.Instance.Save(&note)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(note)
+}
+
 func DeleteNote(w http.ResponseWriter, r *http.Request) {
 	note_id := mux.Vars(r)["id"]
 	var note database.Note
