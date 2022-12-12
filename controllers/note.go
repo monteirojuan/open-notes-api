@@ -10,6 +10,7 @@ import (
 
 func CreateNote(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	var note database.Note
 	json.NewDecoder(r.Body).Decode(&note)
 	database.Instance.Create(&note)
@@ -21,6 +22,7 @@ func GetNotes(w http.ResponseWriter, r *http.Request) {
 
 	database.Instance.Find(&note)
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 	json.NewEncoder(w).Encode(note)
 }
@@ -36,6 +38,7 @@ func GetNoteById(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(w).Encode(note)
 }
 
@@ -45,6 +48,7 @@ func UpdateNote(w http.ResponseWriter, r *http.Request) {
 	database.Instance.First(&note, note_id)
 
 	if note.ID == 0 {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.WriteHeader(http.StatusNotFound)
 		return
 	}
@@ -52,6 +56,7 @@ func UpdateNote(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&note)
 	database.Instance.Save(&note)
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	json.NewEncoder(w).Encode(note)
 }
 
@@ -66,5 +71,6 @@ func DeleteNote(w http.ResponseWriter, r *http.Request) {
 	}
 
 	database.Instance.Delete(&note, note_id)
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.WriteHeader(http.StatusOK)
 }
