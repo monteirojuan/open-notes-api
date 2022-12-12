@@ -29,11 +29,11 @@ func main() {
 }
 
 func RegisterRoutes(router *mux.Router) {
-	router.HandleFunc("/notes/", controllers.GetNotes).Methods("GET")
-	router.HandleFunc("/notes/{id}/", controllers.GetNoteById).Methods("GET")
-	router.HandleFunc("/notes/", controllers.CreateNote).Methods("POST")
-	router.HandleFunc("/notes/{id}/", controllers.UpdateNote).Methods("PUT")
-	router.HandleFunc("/notes/{id}/", controllers.DeleteNote).Methods("DELETE")
+	router.HandleFunc("/notes/", controllers.GetNotes).Methods("GET", "OPTIONS")
+	router.HandleFunc("/notes/{id}/", controllers.GetNoteById).Methods("GET", "OPTIONS")
+	router.HandleFunc("/notes/", controllers.CreateNote).Methods("POST", "OPTIONS")
+	router.HandleFunc("/notes/{id}/", controllers.UpdateNote).Methods("PUT", "OPTIONS")
+	router.HandleFunc("/notes/{id}/", controllers.DeleteNote).Methods("DELETE", "OPTIONS")
 }
 
 func LogRequest(next http.Handler) mux.MiddlewareFunc {
